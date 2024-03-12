@@ -1,0 +1,26 @@
+from math import inf
+def upper_bound(dp, target):
+    lo, hi = 0, len(dp)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if dp[mid] > target:
+            hi = mid
+        else:
+            lo = mid + 1
+    return lo
+
+def longest_sub_len(nums):
+    n = len(nums)
+    dp = [inf] * (n + 1)
+    dp[0] = -inf
+    
+    for i in range(0, n):
+        j = upper_bound(dp, nums[i])
+        if dp[j - 1] < nums[i] and nums[i] < dp[j]:
+            dp[j] = nums[i]
+    
+    ans = 0
+    for i in range(0, n + 1):
+        if dp[i] < inf:
+            ans = i
+    return ans
