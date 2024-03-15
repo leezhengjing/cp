@@ -9,6 +9,7 @@ def permutations(letters):
             path.append(letter)
             used[i] = True
             dfs(start_index + 1, path, used)
+            # dfs(start_index + 1, path + [num], used) , In the case of numbers where we cant .join(), have to just add []
             path.pop()
             used[i] = False
             
